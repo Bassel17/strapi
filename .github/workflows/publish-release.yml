@@ -35,4 +35,4 @@ jobs:
           VERSION: ${{ github.event.inputs.version }}
           DIST_TAG: 'latest'
           GITHUB_ACTOR: ${{ github.actor }}
-          GITHUB_TOKEN: ${{steps.app-token.outputs.token}}
+          GH_TOKEN: ${{steps.app-token.outputs.token}}
