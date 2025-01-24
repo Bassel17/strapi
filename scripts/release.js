@@ -66,8 +66,7 @@ const yargs = require('yargs');
       specifier: options.version,
       dryRun: options.dryRun,
       verbose: options.verbose,
-      // gitCommit: options.gitCommit,
-      // gitTag: options.gitTag,
+      gitCommit: options.gitCommit,
       preid: options.preid,
     });
 
@@ -77,8 +76,8 @@ const yargs = require('yargs');
         version: workspaceVersion,
         dryRun: options.dryRun,
         verbose: options.verbose,
-        gitCommit: true,
-        gitTag: true,
+        gitCommit: false,
+        gitTag: options.gitTag,
       });
     }
   }
