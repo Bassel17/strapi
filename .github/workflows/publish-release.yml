@@ -11,7 +11,7 @@ on:
           - minor
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   publish:
