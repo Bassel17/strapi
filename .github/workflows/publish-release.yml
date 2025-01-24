@@ -11,7 +11,7 @@ on:
           - minor
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
   publish:
@@ -19,29 +19,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Set up SSH key
-        run: |
-          # Create SSH directory
-          mkdir -p ~/.ssh
-
-          # Add the private SSH key from secrets
-          echo "${{ secrets.RELEASINGAPP }}" > ~/.ssh/id_rsa
-
-          # Set the correct permissions for the SSH key
-          chmod 600 ~/.ssh/id_rsa
-
-          # Add GitHub to known hosts to avoid SSH prompts
-          ssh-keyscan github.com >> ~/.ssh/known_hosts
-
-      - name: Verify SSH connection
-        run: |
-          ssh -T git@github.com
-
-      - name: Use GitHub CLI (gh)
-        run: |
-          gh auth status
-          gh repo list
-
+      - uses: actions/create-github-app-token@v1
+        id: app-token
+        with:
+          app-id: ${{ vars.RELEASE_APP_ID }}
+          private-key: ${{ secrets.RELEASINGAPP }}
       - uses: actions/setup-node@v4
         with:
           node-version: 20
@@ -51,3 +33,4 @@ jobs:
           VERSION: ${{ github.event.inputs.version }}
           DIST_TAG: 'latest'
           GITHUB_ACTOR: ${{ github.actor }}
+          GITHUB_TOKEN: ${{steps.app-token.outputs.token}}
