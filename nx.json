@@ -59,6 +59,7 @@
         "createRelease": "github"
       }
     },
+    "releaseTagPattern": "v{version}",
     "version": {
       "conventionalCommits": false,
       "git": {
