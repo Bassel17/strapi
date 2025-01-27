@@ -54,7 +54,6 @@
   "release": {
     "projects": ["packages/**/*", ".github/actions/check-pr-status", "scripts/front"],
     "changelog": {
-      "automaticFromRef":true,
       "workspaceChangelog": {
         "file": false,
         "createRelease": "github"
