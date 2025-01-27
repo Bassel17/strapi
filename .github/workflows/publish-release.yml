@@ -23,7 +23,8 @@ jobs:
       - uses: actions/checkout@v4
         with:
           token: ${{ steps.app-token.outputs.token }}
-          fetch-tags: true
+          fetch-depth: 0 # Fetch full history for the current branch only
+          ref: ${{ github.ref }} # Ensures the workflow checks out the current branch
       - uses: actions/setup-node@v4
         with:
           node-version: 20
